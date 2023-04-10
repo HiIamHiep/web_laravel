@@ -36,7 +36,13 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+//        $object = new Course();
+//        $object->fill($request->except('_token'));
+//        $object->save();
 
+        Course::create($request->except('_token'));
+
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -50,37 +56,39 @@ class CourseController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Course $course)
+ function edit(Course $course)
     {
-        //
+       return view('course.edit', [
+           'each' => $course
+       ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCourseRequest  $request
-     * @param  \App\Models\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCourseRequest $request, Course $course)
+    public function update(Request $request, Course $course)
     {
-        //
+//        Course::where('id', $course->id)->update($request->except([
+//            '_token',
+//            '_method',
+//        ])
+//        );
+
+        $course->update(
+            $request->except([
+                '_token',
+                '_method',
+            ])
+        );
+
+//        $course->fill($request->except('_token'));
+//        $course->save();
+
+        return redirect()->route('courses.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Course  $course
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+
+        return redirect()->route('courses.index');
     }
 }

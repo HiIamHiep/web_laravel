@@ -1,7 +1,7 @@
-<form action="{{ route('course.store') }}" method="post">
+<form action="{{ route('courses.store') }}" method="post">
     @csrf
     Name
     <input type="text" name="name">
     <br>
-    <button>Thêm</button>
+    <button>Them</button>
 </form>

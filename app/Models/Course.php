@@ -9,6 +9,10 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        ];
+
     public function getYearCreatedAtAttribute()
     {
         return $this->created_at->format('Y');
